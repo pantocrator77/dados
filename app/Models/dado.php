@@ -14,8 +14,8 @@ class dado extends Model
         'id', //Autoincrement
         'valor1', //valor dado 1 - integer
         'valor2', //valor dado 2 - integer
-        'resultado' //resultado ganador o perdedor
-    ] 
+        'resultado' //resultado ganador (1) o perdedor (0) 
+    ] ;
     /**
      * Get the user that owns the dado
      *
