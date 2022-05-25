@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+/* 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
-Route::post('players', [UserController::class, 'NewPlayer']);//create player with a new ID
-Route::put('players/{id}', [UserController::class, 'UpdatePlayer']);//modify player with id
+}); */
+Route::post('players', [UserController::class, 'Store']);//create player with a new ID
+Route::put('players/{id}', [UserController::class, 'Update']);//modify player with id
 Route::post('players/{id}/games', [UserController::class, 'Play']);// player with specific ID make new game
 Route::delete('players/{id}/games', [UserController::class, 'DeletePlayer']);//delete all games from single player
 Route::get('players', [UserController::class, 'all_players']);// return all players with medium success rate

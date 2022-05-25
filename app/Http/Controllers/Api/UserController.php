@@ -9,13 +9,25 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-   public function NewPlayer (request $request) {
+    /**
+     * Store a new user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+   public function Store (request $request) {
 
-        $user = user::create([
-            'nickname'=> $request->input('nickname'),
-            'email'=> $request->input('email')            
-        ]);
-       /* $User = new User;
-       ($request->nickname)? $User->nickname = $request->nickname : $User->name="jugador anonimo"; */
+    dd($request);
+/* 
+            $user = new User();
+            $user->nickname = $request->nickname;
+            $user->email = $request->email;
+            
+            $user->save();
+ */
+
+   }
+   public function all_players (request $request) {
+       echo ("hola");
    }
 }
