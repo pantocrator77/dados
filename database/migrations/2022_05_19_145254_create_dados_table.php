@@ -13,11 +13,11 @@ class CreateDadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('dados', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->integer('valor1');
-            $table->integer('valor2');
-            $table->integer('resultado');
+            $table->integer('value1');
+            $table->integer('value2');
+            $table->integer('result');
             $table->unsignedBigInteger('user_id'); //FK
             $table->timestamps();
 
