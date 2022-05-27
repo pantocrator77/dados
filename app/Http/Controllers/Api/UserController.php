@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
-
 use App\Models\User;
+use App\Models\Game;
 
 class UserController extends Controller
 {
@@ -16,18 +17,57 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
    public function Store (request $request) {
+      $request -> validate([
+      'nickname'=> 'required|max:50',
+      'password'=> 'required|max:50',
+      'email'=> 'required|max:80',
+      ]);
+      $user = new User();
+      $user->nickname = $request->nickname;
+      $user->password = $request->password;
+      $user->email = $request->email;
+      $user->save(); 
+      return response()->json(
+       ["user has been created!"],
+        200);
+ 
+   }
+   public function Update (request $request, $id) {
+    $request -> validate([
+      'nickname'=> 'required|max:50',
+      'password'=> 'required|max:50',
+      'email'=> 'required|max:80',
+    ]);
 
-    dd($request);
-/* 
-            $user = new User();
-            $user->nickname = $request->nickname;
-            $user->email = $request->email;
-            
-            $user->save();
- */
+    $user =  User::find($id);
+    $user->nickname = $request->nickname;
+    $user->password = $request->password;
+    $user->email = $request->email;
+    $user->save(); 
+    return response()->json(
+        ["user has been updated!"],
+        200);
+
+}
+   public function AllPlayers (request $request) {
+    $user =  User::all();
+    return response()->json([
+      'nickname' 
+      ]);
 
    }
-   public function all_players (request $request) {
-       echo ("hola");
+
+
+   public function Rate(){
+     $games = Game::withCount('games')->get();
+     foreach ($games as $Game) {
+      dd($games->games_count) ;
+  }
+   
+
+    return response()->json([
+      'name' => 'Abigail',
+      'state' => 'CA',
+      ]);
    }
 }
