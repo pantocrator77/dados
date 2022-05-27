@@ -29,7 +29,7 @@ Route::post('players', [App\Http\Controllers\Api\UserController::class, 'Store']
 Route::put('players/{id}', [App\Http\Controllers\Api\UserController::class, 'Update']);//modify player with id
 Route::post('players/{id}/games', [App\Http\Controllers\Api\GamesController::class, 'Play']);// player with specific ID make new game
 Route::delete('players/{id}/games', [App\Http\Controllers\Api\GamesController::class, 'Destroy']);//delete all games from single player
-Route::get('players', [App\Http\Controllers\Api\UserController::class, 'Rate']);// return all players with medium success rate
+Route::get('players', [App\Http\Controllers\Api\UserController::class, 'AllPlayers']);// return all players with medium success rate
 Route::get('players/{id}/games', [App\Http\Controllers\Api\GamesController::class, 'AllGames']);// all games from player with specific ID
 Route::get('players/ranking', [App\Http\Controllers\Api\GamesController::class, 'RankAll']);// list all players with medium success rate
 Route::get('players/ranking/loser', [App\Http\Controllers\Api\GamesController::class, 'RankLoser']);// list the player with lower success rate

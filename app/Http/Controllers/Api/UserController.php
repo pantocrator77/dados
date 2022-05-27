@@ -50,16 +50,17 @@ class UserController extends Controller
 
 }
    public function AllPlayers (request $request) {
-    $user =  User::all();
+    $users =  User::all('nickname', 'created_at');
     return response()->json([
-      'nickname' 
-      ]);
+      'message' => 'todos jugadores',
+      'data' => $users
+      ],200);
 
    }
-
+  
 
    public function Rate(){
-     $games = Game::withCount('games')->get();
+     $games = Game::withCount('user')->get();
      foreach ($games as $Game) {
       dd($games->games_count) ;
   }
