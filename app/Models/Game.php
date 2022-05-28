@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\softDeletes;
+//use Illuminate\Database\Eloquent\softDeletes;
 
 class game extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    //use SoftDeletes;
     protected $fillable =[
         'id', //Autoincrement
         'value1', //value dado 1 - integer

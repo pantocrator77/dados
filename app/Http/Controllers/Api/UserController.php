@@ -23,6 +23,7 @@ class UserController extends Controller
       'email'=> 'required|max:80',
       ]);
       $user = new User();
+      $user->nickname = "anonim";
       $user->nickname = $request->nickname;
       $user->password = $request->password;
       $user->email = $request->email;
@@ -49,7 +50,7 @@ class UserController extends Controller
         200);
 
 }
-   public function AllPlayers (request $request) {
+   public function AllPlayers () {
     $users =  User::all('nickname', 'created_at');
     return response()->json([
       'message' => 'todos jugadores',
@@ -60,15 +61,21 @@ class UserController extends Controller
   
 
    public function Rate(){
-     $games = Game::withCount('user')->get();
+     $games = User::withCount('games')->get();
+     return response()->json([
+      'message' => 'todos los jugadores',
+      'data' => $games
+      ],200);
+    /*  return response()->json([
+      dd($games->games_count),200
+      ]);  */
+/*    
      foreach ($games as $Game) {
       dd($games->games_count) ;
-  }
-   
-
-    return response()->json([
+  } */
+   /*  return response()->json([
       'name' => 'Abigail',
       'state' => 'CA',
-      ]);
+      ]); */
    }
 }
