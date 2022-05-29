@@ -17,7 +17,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   public function Store (request $request) {
+   public function Store (request $request) {  //store new player from request
       $request -> validate([
       'nickname'=> 'required|max:50',
       'password'=> 'required|max:50',
@@ -35,7 +35,7 @@ class UserController extends Controller
         200); 
  
    }
-   public function Update (request $request, $id) {
+   public function Update (request $request, $id) { //update player
     $request -> validate([
       'nickname'=> 'required|max:50',
       'password'=> 'required|max:50',
@@ -52,7 +52,7 @@ class UserController extends Controller
         200);
 
 }
-   public function AllPlayers () {
+   public function AllPlayers () {   //list all players
     $users =  User::all('nickname', 'created_at');
     return response()->json([
       'message' => 'todos jugadores',
@@ -62,7 +62,7 @@ class UserController extends Controller
    }
   
 
-   public function Rate(){
+   public function Rate(){      //find rate for players
      $games = User::withCount('games')->get();
    
      foreach ($games as $game){
