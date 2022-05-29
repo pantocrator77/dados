@@ -38,11 +38,23 @@ class GamesController extends Controller
       }
    }
    public function Destroy ($id) {
-        //   $game($id)->destroy(); all games from user ID have been destroyed.
-      return response()->json(
-          ["All games from the player have been erased!"],
+      $games=Game::where('user_id', $id)->delete();
+        return response()->json(
+          "all games have been deleted",
           200);
     }
+   public function AllGames($id) {
+        $games=Game::where('user_id', $id)->get();
+        return response()->json(
+          $games,
+          200);
+      }
+      public function RankAll() {
+        $games=Game::all($id)->get();
+        return response()->json(
+          $games,
+          200);
+      }
 
 
 }

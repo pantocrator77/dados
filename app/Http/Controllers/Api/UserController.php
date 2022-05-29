@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller\Api\GamesController;
 use App\Models\User;
 use App\Models\Game;
 
@@ -27,6 +28,7 @@ class UserController extends Controller
       $user->nickname = $request->nickname;
       $user->password = $request->password;
       $user->email = $request->email;
+      $user->rate =0;
       $user->save();  
       return response()->json(
        ["user $user->nickname has been created!"],
@@ -69,9 +71,13 @@ class UserController extends Controller
         echo $game->games_count;
         echo ("     total ganadas: ");
         $win=Game::where('user_id', $game->id)->sum('result');
+        $rate=($win*100)/$game->games_count;
+        $game->rate = $rate;
         echo $win;
         if ($game->games_count != 0){
-        echo (". El porcentaje de victoria es:").("<b>").($win*100)/$game->games_count.("</b>");
+        $rate= round(($win*100)/$game->games_count, 2);
+        //$users->rate = $rate; // assign rate to user.rate
+        echo (". El porcentaje de victoria es:").("<b>").$rate.("</b>");
         } 
         elseif ($game->games_count == 0){
          echo ". El jugador todavia no ha jugado.";
@@ -82,26 +88,15 @@ class UserController extends Controller
      
    }
    public function Winner(){
-      $games = User::withCount('games')->get()->sortByDesc('$rate');
+      $games = User::withCount('games')->get(); // find all games from single player
       foreach ($games as $game){
-         echo ("<b>").$game->nickname.("</b>");
-         echo (" total partidas jugadas: ");
-         echo $game->games_count;
-         echo ("     total ganadas: ");
-         $win=Game::where('user_id', $game->id)->sum('result');
-         echo $win;
-         if ($game->games_count != 0){
-            $rate=($win*100)/$game->games_count;
-         echo (". El porcentaje de victoria es:").("<b>").$rate.("</b>");
-         } 
-         elseif ($game->games_count == 0){
-          echo ". El jugador todavia no ha jugado.";
-         }
-         $winner = User::max('$win');
-         echo ('el ganador es :').$winner;
-        
+         $win=Game::where('user_id', $game->id)->sum('result'); //get all games
+         $rate=($win*100)/$game->games_count; //find win rate
+         echo("esto es el porcentaje: ").$rate;
          echo ("<br>");
       } 
-   
+     /*  $winner= User::query()
+      ->where () */
    }
 }
+
