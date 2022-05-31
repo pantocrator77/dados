@@ -56,6 +56,7 @@ class GamesController extends Controller
       $user =  User::find($id);
       $user->total_games = 0;
       $user->wins = 0;
+      $user->rate= 0;
       $user->save();
         return response()->json(
           "all games from user have been deleted",

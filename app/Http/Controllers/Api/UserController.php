@@ -93,46 +93,9 @@ public function AddRate ($id) {
   
      }
 }
-   /* public function Rate(){      //find rate for players
-     $games = User::withCount('games')->get();
-   
-     foreach ($games as $game){
-        echo ("<b>").$game->nickname.("</b>");
-        echo (" total partidas jugadas: ");
-        echo $game->games_count;
-        echo ("     total ganadas: ");
-        $win=Game::where('user_id', $game->id)->sum('result');
-        $rate=($win*100)/$game->games_count;
-        $game->rate = $rate;
-        echo $win;
-        if ($game->games_count != 0){
-        $rate= round(($win*100)/$game->games_count, 2);
-        echo (". El porcentaje de victoria es:").("<b>").$rate.("</b>");
-        } 
-        elseif ($game->games_count === 0){
-         echo ". El jugador todavia no ha jugado.";
-        }
-       
-        echo ("<br>");
-     } 
-      */
+  
 
-  /* 
-   public function Winner($user_id){
-      $win=Game::where('user_id', $user_id)->sum('result'); 
-      dd($win); */
-      /* $games = Game::withCount('users')->where(->get(); // find all games from single player 
-      foreach ($games as $game){
-         $win=Game::where('user_id', $game->id)->sum('result'); //get all games
-         $sorted = $games->sortBy(function ($rate) {
-            return $user['nickname'].$user['rate'];
-        });
-         $rate=round(($win*100)/$game->games_count, 2); //find win rate
-         echo ("esto es el porcentaje: ").$rate;
-         echo ("<br>"); */
-      
-     /*  $winner= User::query()
-      ->where () */
+ 
    
 
 
