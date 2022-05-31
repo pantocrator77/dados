@@ -20,7 +20,6 @@ class CreateDadosTable extends Migration
             $table->integer('result');
             $table->unsignedBigInteger('user_id'); //FK
             $table->timestamps();
-
             $table->foreign('user_id')->references ('id')
                 ->on ('users');
         });
