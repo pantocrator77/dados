@@ -30,6 +30,7 @@ class UserController extends Controller
       $user->email = $request->email;
       $user->total_games =0;
       $user->wins =0;
+      $user->rate=0;
       $user->save();  
       return response()->json(
        ["user $user->nickname has been created!"],
@@ -59,21 +60,41 @@ public function AddRate ($id) {
    $rate= round($calculate, 2);
    }
    public function AllPlayers () {   //list all players
-    $users =  User::all();
-    echo $users->nickname;
-    dd($users); 
-   //array_map("AddRate", $users) ;
-/*     $calculate = ($users->wins*100)/$users->total_games;
-    $rate= round($calculate, 2); */
+    $users =  User::all('nickname', 'created_at', 'total_games');
     return response()->json([
-      'message' => 'todos jugadores',
-      'data' => $users,
+      'message' => 'All players',
+      'data' => $users
       ],200);
 
    }
+   public function RankAll () {   //list all players
+      $users =  User::all('nickname', 'rate');
+      return response()->json([
+        'message' => 'Players ranking',
+        'data' => $users
+        ],200);
   
-
-   public function Rate(){      //find rate for players
+     }
+     public function Winner () {   //get player with highest rate
+      $winner = User::orderBy('rate', 'desc')->first(); // gets the best rate
+      //$users =  User::max('rate', 'nickname');
+      return response()->json([
+        'message' => 'The winner is:',
+        'data' => [$winner->nickname, $winner->rate]
+        ],200);
+  
+     }
+     public function Loser () {   //get player with highest rate
+      $winner = User::orderBy('rate', 'asc')->first(); // gets the best rate
+      //$users =  User::max('rate', 'nickname');
+      return response()->json([
+        'message' => 'The loser is:',
+        'data' => [$winner->nickname, $winner->rate]
+        ],200);
+  
+     }
+}
+   /* public function Rate(){      //find rate for players
      $games = User::withCount('games')->get();
    
      foreach ($games as $game){
@@ -87,10 +108,6 @@ public function AddRate ($id) {
         echo $win;
         if ($game->games_count != 0){
         $rate= round(($win*100)/$game->games_count, 2);
-       /*  $users = New user;
-         $users->rate = $rate;
-         $users->save();
-        $users->rate = $rate; // assign rate to user.rate */
         echo (". El porcentaje de victoria es:").("<b>").$rate.("</b>");
         } 
         elseif ($game->games_count === 0){
@@ -99,11 +116,12 @@ public function AddRate ($id) {
        
         echo ("<br>");
      } 
-     
-   }
+      */
+
+  /* 
    public function Winner($user_id){
       $win=Game::where('user_id', $user_id)->sum('result'); 
-      dd($win);
+      dd($win); */
       /* $games = Game::withCount('users')->where(->get(); // find all games from single player 
       foreach ($games as $game){
          $win=Game::where('user_id', $game->id)->sum('result'); //get all games
@@ -116,6 +134,6 @@ public function AddRate ($id) {
       
      /*  $winner= User::query()
       ->where () */
-   }
-}
+   
+
 

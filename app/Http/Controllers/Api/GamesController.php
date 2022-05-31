@@ -27,7 +27,7 @@ class GamesController extends Controller
         $user->wins ++;
         $calculate = ($user->wins*100)/$user->total_games;
         $rate= round($calculate, 2);
-        $user->rate=rate;
+        $user->rate=$rate;
         $user -> save();
         return response()->json(
             ["Total score is ".$score.", the player has won!"],
@@ -42,7 +42,7 @@ class GamesController extends Controller
         $game -> save();
         $calculate = ($user->wins*100)/$user->total_games;
         $rate= round($calculate, 2);
-        $user->rate=rate;
+        $user->rate=$rate;
         $user -> save();
         return response()->json(
             ["Total score is ".$score.", the player has lost!"],
@@ -67,12 +67,12 @@ class GamesController extends Controller
           $games,
           200);
       }
-      public function RankAll() {
+     /*  public function RankAll() {
         $games=Game::all($id)->get();
         return response()->json(
           $games,
           200);
-      }
+      } */
 
 
 }

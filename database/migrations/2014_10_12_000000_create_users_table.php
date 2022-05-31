@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('total_games');
             $table->integer('wins');
+            $table->float('rate');
             $table->rememberToken();
             $table->timestamps();
         });
