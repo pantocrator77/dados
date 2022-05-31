@@ -19,13 +19,12 @@ class UserController extends Controller
      */
    public function Store (request $request) {  //store new player from request
       $request -> validate([
-      'nickname'=> 'required|max:50',
+      'nickname'=> 'max:50',
       'password'=> 'required|max:50',
       'email'=> 'required|max:80',
       ]);
       $user = new User();
-      $user->nickname = "anonim";
-      $user->nickname = $request->nickname;
+      $user->nickname = $request->input('nickname', 'anonymous');
       $user->password = $request->password;
       $user->email = $request->email;
       $user->total_games =0;
